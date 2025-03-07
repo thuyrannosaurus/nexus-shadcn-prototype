@@ -64,6 +64,7 @@ const data = {
       url: "#",
       icon: FileText,
       isActive: true,
+      hasAccordion: true,
       items: [
         {
           title: "Recommerce",
@@ -87,30 +88,16 @@ const data = {
       title: "Users",
       url: "#",
       icon: Users,
+      hasAccordion: false,
       items: [
-        {
-          title: "Search",
-          url: "#",
-        },
-        {
-          title: "Testfield",
-          url: "#",
-        },
-        {
-          title: "X",
-          url: "#",
-        },
       ],
     },
     {
       title: "Organizations",
       url: "#",
       icon: Store,
+      hasAccordion: true,
       items: [
-        {
-            title: "Search",
-            url: "#",
-            },
             {
             title: "Email Log",
              url: "#",
@@ -121,24 +108,7 @@ const data = {
       title: "Conversations",
       url: "#",
       icon: MessageSquare,
-      items: [
-        {
-          title: "Search",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
+      hasAccordion: false,
     },
   ],
   projects: [
@@ -146,16 +116,13 @@ const data = {
       name: "Access Control",
       url: "#",
       icon: KeyRound,
+      hasPopout: true,
     },
     {
       name: "External links",
       url: "#",
       icon: Link,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
+      hasPopout: false,
     },
   ],
 }
