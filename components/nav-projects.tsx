@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import {
   Folder,
   Forward,
@@ -40,6 +41,15 @@ export function NavProjects({
   }[]
 }) {
   const { isMobile } = useSidebar()
+  const pathname = usePathname()
+
+  // Check if a URL is active (exact match or parent of current path)
+  const isUrlActive = (url: string) => {
+    if (url === "/") {
+      return pathname === "/";
+    }
+    return pathname === url || pathname.startsWith(`${url}/`);
+  };
 
   return (
     <SidebarGroup>
@@ -47,7 +57,10 @@ export function NavProjects({
       <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton 
+              asChild
+              isActive={isUrlActive(item.url)}
+            >
               <Link href={item.url}>
                 <item.icon />
                 <span>{item.name}</span>
