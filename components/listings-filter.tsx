@@ -56,6 +56,7 @@ export function ListingsFilter() {
   const [moderationStatus, setModerationStatus] = useState("")
   const [region, setRegion] = useState("")
   const [contentVisible, setContentVisible] = useState(false)
+  const [contentPreloaded, setContentPreloaded] = useState(false)
 
   // Categories data for the Ad types dropdown
   const categories = [
@@ -153,19 +154,36 @@ export function ListingsFilter() {
     );
   };
 
-  // Handle animation timing
+  // Handle animation timing with improved sequence
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
+    let preloadTimeout: NodeJS.Timeout;
+    let visibilityTimeout: NodeJS.Timeout;
+    
     if (showMoreFilters) {
-      // Small delay before showing content
-      timeout = setTimeout(() => {
+      // Phase 1: Preload content (0ms) - Content is in DOM but invisible
+      setContentPreloaded(true);
+      
+      // Phase 2: Start card expansion (50ms delay)
+      // This happens automatically via CSS animation
+      
+      // Phase 3: Fade in content (250ms delay)
+      visibilityTimeout = setTimeout(() => {
         setContentVisible(true);
-      }, 150); // Slightly longer delay to match the animation
+      }, 250);
     } else {
-      // Hide content immediately when closing
+      // When closing: Hide content immediately, but keep it preloaded briefly
       setContentVisible(false);
+      
+      // Remove content from preload after animation completes
+      preloadTimeout = setTimeout(() => {
+        setContentPreloaded(false);
+      }, 300);
     }
-    return () => clearTimeout(timeout);
+    
+    return () => {
+      clearTimeout(preloadTimeout);
+      clearTimeout(visibilityTimeout);
+    };
   }, [showMoreFilters]);
 
   // Ensure content is hidden on initial render
@@ -189,7 +207,7 @@ export function ListingsFilter() {
     <Card className="bg-muted/50 border-0">
       <CardContent className="p-6 space-y-6">
         <div className="grid grid-cols-12 gap-4">
-          <div className="col-span-12 md:col-span-4">
+          <div className="col-span-12 md:col-span-6">
             <div className="flex items-center gap-1.5">
               <span className="text-sm font-medium">Search</span>
               <TooltipProvider>
@@ -221,7 +239,7 @@ export function ListingsFilter() {
             </div>
           </div>
 
-          <div className="col-span-12 md:col-span-8">
+          <div className="col-span-12 md:col-span-6">
             <div className="flex items-center">
               <span className="text-sm font-medium">Modified date</span>
             </div>
@@ -401,63 +419,67 @@ export function ListingsFilter() {
             className="overflow-hidden"
           >
             <CollapsibleContent 
-              className="space-y-4 pt-2 pb-4 data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up"
+              className="data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up"
             >
-              <div className={cn(
-                "grid grid-cols-12 gap-4 transition-all duration-300 ease-in-out",
-                contentVisible 
-                  ? "opacity-100 transform-none" 
-                  : "opacity-0 transform translate-y-2"
-              )}>
-                <div className="col-span-12 md:col-span-3">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-sm font-medium">Advertiser type</span>
+              {(contentPreloaded || showMoreFilters) && (
+                <div className="space-y-4 pt-2 pb-4">
+                  <div className={cn(
+                    "grid grid-cols-12 gap-4 transition-all duration-500 ease-in-out",
+                    contentVisible 
+                      ? "opacity-100 transform-none" 
+                      : "opacity-0 transform translate-y-2"
+                  )}>
+                    <div className="col-span-12 md:col-span-3">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-sm font-medium">Advertiser type</span>
+                      </div>
+                      <Select value={advertiserType} onValueChange={setAdvertiserType}>
+                        <SelectTrigger className="mt-1.5 bg-background">
+                          <SelectValue placeholder="Select advertiser type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="private">Private</SelectItem>
+                          <SelectItem value="business">Business</SelectItem>
+                          <SelectItem value="dealer">Dealer</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="col-span-12 md:col-span-3">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-sm font-medium">Moderation status</span>
+                      </div>
+                      <Select value={moderationStatus} onValueChange={setModerationStatus}>
+                        <SelectTrigger className="mt-1.5 bg-background">
+                          <SelectValue placeholder="Select moderation status" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="approved">Approved</SelectItem>
+                          <SelectItem value="pending">Pending</SelectItem>
+                          <SelectItem value="rejected">Rejected</SelectItem>
+                          <SelectItem value="flagged">Flagged</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="col-span-12 md:col-span-4">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-sm font-medium">Region</span>
+                      </div>
+                      <Select value={region} onValueChange={setRegion}>
+                        <SelectTrigger className="mt-1.5 bg-background">
+                          <SelectValue placeholder="Select region" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="east">East</SelectItem>
+                          <SelectItem value="west">West</SelectItem>
+                          <SelectItem value="north">North</SelectItem>
+                          <SelectItem value="south">South</SelectItem>
+                          <SelectItem value="central">Central</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
-                  <Select value={advertiserType} onValueChange={setAdvertiserType}>
-                    <SelectTrigger className="mt-1.5 bg-background">
-                      <SelectValue placeholder="Select advertiser type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="private">Private</SelectItem>
-                      <SelectItem value="business">Business</SelectItem>
-                      <SelectItem value="dealer">Dealer</SelectItem>
-                    </SelectContent>
-                  </Select>
                 </div>
-                <div className="col-span-12 md:col-span-3">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-sm font-medium">Moderation status</span>
-                  </div>
-                  <Select value={moderationStatus} onValueChange={setModerationStatus}>
-                    <SelectTrigger className="mt-1.5 bg-background">
-                      <SelectValue placeholder="Select moderation status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="approved">Approved</SelectItem>
-                      <SelectItem value="pending">Pending</SelectItem>
-                      <SelectItem value="rejected">Rejected</SelectItem>
-                      <SelectItem value="flagged">Flagged</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="col-span-12 md:col-span-4">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-sm font-medium">Region</span>
-                  </div>
-                  <Select value={region} onValueChange={setRegion}>
-                    <SelectTrigger className="mt-1.5 bg-background">
-                      <SelectValue placeholder="Select region" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="east">East</SelectItem>
-                      <SelectItem value="west">West</SelectItem>
-                      <SelectItem value="north">North</SelectItem>
-                      <SelectItem value="south">South</SelectItem>
-                      <SelectItem value="central">Central</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
+              )}
             </CollapsibleContent>
 
             <div className="flex items-center justify-between mt-2">
