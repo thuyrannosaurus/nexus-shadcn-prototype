@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { CalendarIcon, ChevronDown, HelpCircle, Search, X } from "lucide-react"
+import { CalendarIcon, Check, ChevronDown, ChevronRight, HelpCircle, Search, X } from "lucide-react"
 import { format } from "date-fns"
 
 import { Button } from "@/components/ui/button"
@@ -30,6 +30,19 @@ import {
 } from "@/components/ui/collapsible"
 import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 export function ListingsFilter() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -43,6 +56,102 @@ export function ListingsFilter() {
   const [moderationStatus, setModerationStatus] = useState("")
   const [region, setRegion] = useState("")
   const [contentVisible, setContentVisible] = useState(false)
+
+  // Categories data for the Ad types dropdown
+  const categories = [
+    {
+      name: "Vehicles",
+      items: [
+        "ATV for sale",
+        "Boat dock",
+        "Boat for rent",
+        "Boat for sale",
+        "Boat motors and parts",
+        "Boat wanted",
+        "Bus and minibus for sale",
+        "Car for sale",
+        "Car for sale by business user (LEGACY)",
+        "Caravan for sale",
+        "Leased car for sale",
+        "Leased car sold by business user (LEGACY)",
+        "Mobile home for sale",
+        "Mopeds for sale",
+        "Motorcycle for sale",
+        "Motorcycles for sale",
+        "New boats for sale",
+        "New cars for sale",
+        "New motorcycle for sale",
+        "Snowmobile for sale",
+        "Truck and trailer for sale",
+      ],
+    },
+    {
+      name: "Real Estate",
+      items: [
+        "Commercial plot for sale",
+        "Commercial property for rent",
+        "Commercial property for sale",
+        "Company for sale",
+        "Construction",
+        "External property",
+        "Leisure plot for sale",
+        "Leisure property for sale",
+        "New development project",
+        "New development unit",
+        "New leisure development project",
+        "New leisure development unit",
+        "Planned new development",
+        "Plot for sale",
+        "Property for rent",
+        "Property for sale",
+        "Property for sale abroad",
+        "Property wanted for rent",
+      ],
+    },
+    {
+      name: "Jobs & Services",
+      items: [
+        "Full-time job available",
+        "Full-time staffing",
+        "Management position available",
+        "Part-time job available",
+        "Part-time staffing",
+      ],
+    },
+    {
+      name: "Marketplace & Offers",
+      items: [
+        "Marketplace (LEGACY) - Giveaway",
+        "Marketplace (LEGACY) - Sell",
+        "Marketplace (LEGACY) - Wanted",
+        "Request Christmas aid",
+        "Christmas aid offer",
+        "SMP Recommerce Giveaway",
+        "SMP Recommerce Sell",
+        "SMP Recommerce Wanted",
+      ],
+    },
+    {
+      name: "Agriculture",
+      items: [
+        "Agricultural tools for sale",
+        "Threshers for sale",
+        "Tractors for sale",
+      ],
+    },
+  ];
+
+  // Track expanded categories
+  const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
+
+  // Toggle category expansion
+  const toggleCategory = (categoryName: string) => {
+    setExpandedCategories(prev => 
+      prev.includes(categoryName) 
+        ? prev.filter(name => name !== categoryName)
+        : [...prev, categoryName]
+    );
+  };
 
   // Handle animation timing
   useEffect(() => {
@@ -175,7 +284,7 @@ export function ListingsFilter() {
         <div className="space-y-8">
           {/*<h3 className="text-lg font-medium">Filters</h3>*/}
           <div className="grid grid-cols-12 gap-4">
-            <div className="col-span-12 md:col-span-5">
+            <div className="col-span-12 md:col-span-4">
               <div className="flex items-center gap-1.5">
                 <span className="text-sm font-medium">Email address</span>
                 <TooltipProvider>
@@ -197,7 +306,7 @@ export function ListingsFilter() {
                 className="mt-1.5 bg-background"
               />
             </div>
-            <div className="col-span-12 md:col-span-3">
+            <div className="col-span-12 md:col-span-4">
               <div className="flex items-center gap-1.5">
                 <span className="text-sm font-medium">Ad types</span>
                 <TooltipProvider>
@@ -211,17 +320,49 @@ export function ListingsFilter() {
                   </Tooltip>
                 </TooltipProvider>
               </div>
-              <Select value={adType1} onValueChange={setAdType1}>
-                <SelectTrigger className="mt-1.5 bg-background">
-                  <SelectValue placeholder="Select ad type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="for_sale">For Sale</SelectItem>
-                  <SelectItem value="wanted">Wanted</SelectItem>
-                  <SelectItem value="rental">Rental</SelectItem>
-                  <SelectItem value="job">Job</SelectItem>
-                </SelectContent>
-              </Select>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="w-full mt-1.5 bg-background justify-between font-normal text-muted-foreground">
+                    {adType1 || "Select ad type"}
+                    <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50 text-muted-foreground" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-[330px] max-h-[400px] overflow-auto">
+                  <DropdownMenuItem 
+                    onClick={() => setAdType1("")}
+                    className="flex items-center justify-between font-normal"
+                  >
+                    None
+                    {adType1 === "" && <Check className="h-4 w-4 ml-2" />}
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  {[...categories]
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .map((category) => (
+                    <DropdownMenuSub key={category.name}>
+                      <DropdownMenuSubTrigger>
+                        <span>{category.name}</span>
+                      </DropdownMenuSubTrigger>
+                      <DropdownMenuPortal>
+                        <DropdownMenuSubContent className="max-h-[300px] overflow-auto">
+                          {[...category.items]
+                            .sort((a, b) => a.localeCompare(b))
+                            .map((item) => (
+                            <DropdownMenuItem 
+                              key={item}
+                              onClick={() => setAdType1(item)}
+                              className="flex items-center justify-between"
+                            >
+                              {item}
+                              {adType1 === item && <Check className="h-4 w-4 ml-2" />}
+                            </DropdownMenuItem>
+                          ))}
+                        </DropdownMenuSubContent>
+                      </DropdownMenuPortal>
+                    </DropdownMenuSub>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
             <div className="col-span-12 md:col-span-4">
               <div className="flex items-center gap-1.5">
@@ -260,10 +401,10 @@ export function ListingsFilter() {
             className="overflow-hidden"
           >
             <CollapsibleContent 
-              className="space-y-6 pt-4 data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up"
+              className="space-y-4 pt-2 pb-4 data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up"
             >
               <div className={cn(
-                "grid grid-cols-12 gap-4 transition-all duration-500 ease-in-out",
+                "grid grid-cols-12 gap-4 transition-all duration-300 ease-in-out",
                 contentVisible 
                   ? "opacity-100 transform-none" 
                   : "opacity-0 transform translate-y-2"
