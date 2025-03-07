@@ -118,7 +118,6 @@ export function NavUser({
                   </SelectContent>
                 </Select>
               </DropdownMenuItem>
-              <DropdownMenuSeparator />
 
               <DropdownMenuItem className="p-2">
                 <SunMoon className="mr-2 h-4 w-4" />
@@ -143,11 +142,11 @@ export function NavUser({
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Heart className="mr-2 h-4 w-4" />
-                Give feedback
+                Give Feedback
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <LifeBuoy className="mr-2 h-4 w-4" />
-                Support
+                Get Support
               </DropdownMenuItem>
               
             </DropdownMenuGroup>
