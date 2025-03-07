@@ -1,5 +1,6 @@
 "use client"
 
+import { useTheme } from "next-themes"
 import {
   BadgeCheck,
   Bell,
@@ -14,6 +15,7 @@ import {
   Sparkles,
   Sun,
   SunMoon,
+  Moon,
 } from "lucide-react"
 
 import {
@@ -43,7 +45,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export function NavUser({
   user,
@@ -56,6 +58,16 @@ export function NavUser({
 }) {
   const { isMobile } = useSidebar()
   const [language, setLanguage] = useState("en")
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  // Ensure component is mounted before accessing theme to avoid hydration mismatch
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Ensure theme state is properly initialized
+  const currentTheme = mounted ? theme || "system" : "system"
 
   return (
     <SidebarMenu>
@@ -122,14 +134,29 @@ export function NavUser({
               <DropdownMenuItem className="p-2">
                 <SunMoon className="mr-2 h-4 w-4" />
                 <div className="flex-1">Theme</div>
-                <Select value={language} onValueChange={setLanguage}>
-                  <SelectTrigger className="h-7 w-[110px] border-none px-2 py-0 gap-1 shadow-none  [&>span]:truncate flex justify-end">
+                <Select value={currentTheme} onValueChange={setTheme}>
+                  <SelectTrigger className="h-7 w-[110px] border-none px-2 py-0 gap-1 shadow-none [&>span]:truncate flex justify-end">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="en">Automatic</SelectItem>
-                    <SelectItem value="no">Light theme</SelectItem>
-                    <SelectItem value="sv">Dark theme</SelectItem>
+                    <SelectItem value="system">
+                      <div className="flex items-center">
+                        <SunMoon className="mr-2 h-4 w-4" />
+                        <span>Automatic</span>
+                      </div>
+                    </SelectItem>
+                    <SelectItem value="light">
+                      <div className="flex items-center">
+                        <Sun className="mr-2 h-4 w-4" />
+                        <span>Light theme</span>
+                      </div>
+                    </SelectItem>
+                    <SelectItem value="dark">
+                      <div className="flex items-center">
+                        <Moon className="mr-2 h-4 w-4" />
+                        <span>Dark theme</span>
+                      </div>
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </DropdownMenuItem>
