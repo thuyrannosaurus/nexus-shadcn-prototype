@@ -61,32 +61,32 @@ const data = {
   navMain: [
     {
       title: "Listings",
-      url: "#",
+      url: "/listings",
       icon: FileText,
       isActive: true,
       hasAccordion: true,
       items: [
         {
           title: "Recommerce",
-          url: "#",
+          url: "/listings/recommerce",
         },
         {
           title: "Real estate",
-          url: "#",
+          url: "/listings/real-estate",
         },
         {
           title: "Mobility",
-          url: "#",
+          url: "/listings/mobility",
         },
         {
           title: "Jobs",
-          url: "#",
+          url: "/listings/jobs",
         },  
       ],
     },
     {
       title: "Users",
-      url: "#",
+      url: "/users",
       icon: Users,
       hasAccordion: false,
       items: [
@@ -94,19 +94,19 @@ const data = {
     },
     {
       title: "Organizations",
-      url: "#",
+      url: "/organizations",
       icon: Store,
       hasAccordion: true,
       items: [
             {
             title: "Email Log",
-             url: "#",
+             url: "/organizations/email-log",
             },                 
       ],
     },
     {
       title: "Conversations",
-      url: "#",
+      url: "/conversations",
       icon: MessageSquare,
       hasAccordion: false,
     },
@@ -114,13 +114,13 @@ const data = {
   projects: [
     {
       name: "Access Control",
-      url: "#",
+      url: "/access-control",
       icon: KeyRound,
       hasPopout: true,
     },
     {
       name: "External links",
-      url: "#",
+      url: "/external-links",
       icon: Link,
       hasPopout: false,
     },
