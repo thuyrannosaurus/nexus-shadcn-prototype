@@ -106,7 +106,7 @@ export function NavUser({
                 <Globe className="mr-2 h-4 w-4" />
                 <div className="flex-1">Language</div>
                 <Select value={language} onValueChange={setLanguage}>
-                  <SelectTrigger className="h-7 w-[110px] border-none px-2 py-0 shadow-none [&>span]:truncate">
+                  <SelectTrigger className="h-7 w-[110px] border-none px-2 py-0 gap-1 shadow-none  [&>span]:truncate flex justify-end">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -123,7 +123,7 @@ export function NavUser({
                 <SunMoon className="mr-2 h-4 w-4" />
                 <div className="flex-1">Theme</div>
                 <Select value={language} onValueChange={setLanguage}>
-                  <SelectTrigger className="h-7 w-[110px] border-none px-2 py-0 shadow-none [&>span]:truncate">
+                  <SelectTrigger className="h-7 w-[110px] border-none px-2 py-0 gap-1 shadow-none  [&>span]:truncate flex justify-end">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
