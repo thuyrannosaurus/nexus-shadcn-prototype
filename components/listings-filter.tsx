@@ -550,7 +550,7 @@ export function ListingsFilter() {
                         <span>{category.name}</span>
                       </DropdownMenuSubTrigger>
                       <DropdownMenuPortal>
-                        <DropdownMenuSubContent className="max-h-[300px] overflow-auto">
+                        <DropdownMenuSubContent className="max-h-[500px] overflow-auto">
                           {[...category.items]
                             .sort((a, b) => a.localeCompare(b))
                             .map((item) => (
@@ -598,14 +598,14 @@ export function ListingsFilter() {
                       </div>
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-56 max-h-[400px] overflow-auto">
+                  <DropdownMenuContent className="w-[330px] max-h-[400px] overflow-auto">
                     {productCategories.map((category) => (
                       <DropdownMenuSub key={category.name}>
                         <DropdownMenuSubTrigger>
                           <span>{category.name}</span>
                         </DropdownMenuSubTrigger>
                         <DropdownMenuPortal>
-                          <DropdownMenuSubContent className="max-h-[500px] overflow-auto">
+                          <DropdownMenuSubContent className="max-h-[300px] overflow-auto">
                             <DropdownMenuCheckboxItem 
                               checked={selectedCategories.includes(category.name)}
                               onCheckedChange={() => toggleCategorySelection(category.name)}
@@ -651,17 +651,6 @@ export function ListingsFilter() {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-                {selectedCategories.length > 0 && (
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setSelectedCategories([]);
-                    }}
-                    className="absolute right-8 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-700 text-sm font-medium"
-                  >
-                    Clear
-                  </button>
-                )}
               </div>
             </div>
           </div>
