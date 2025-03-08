@@ -42,6 +42,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
+  DropdownMenuCheckboxItem,
 } from "@/components/ui/dropdown-menu"
 
 export function ListingsFilter() {
@@ -51,12 +52,14 @@ export function ListingsFilter() {
   const [emailAddress, setEmailAddress] = useState("")
   const [adType1, setAdType1] = useState("")
   const [adType2, setAdType2] = useState("")
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [showMoreFilters, setShowMoreFilters] = useState(false)
   const [advertiserType, setAdvertiserType] = useState("")
   const [moderationStatus, setModerationStatus] = useState("")
   const [region, setRegion] = useState("")
   const [contentVisible, setContentVisible] = useState(false)
   const [contentPreloaded, setContentPreloaded] = useState(false)
+  const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false)
 
   // Categories data for the Ad types dropdown
   const categories = [
@@ -142,12 +145,195 @@ export function ListingsFilter() {
     },
   ];
 
+  // New categories data structure
+  const productCategories = [
+    {
+      name: "Antiques and Art",
+      items: [
+        "Antique Furniture",
+        "Cutlery and Silverware",
+        "Ceramics, Porcelain, and Glass",
+        "Art",
+        "Other Antiques"
+      ]
+    },
+    {
+      name: "Car, Boat, and Motorcycle Accessories",
+      items: [
+        "Motorhome and Camper Accessories",
+        "Car Parts",
+        "Motorcycle Accessories and Spare Parts",
+        "ATV Spare Parts",
+        "Trailers",
+        "Boat Spare Parts",
+        "Other Car Accessories"
+      ]
+    },
+    {
+      name: "Electronics and Home Appliances",
+      items: [
+        "Small Home Appliances",
+        "Home Appliances",
+        "Phones and Accessories",
+        "Computers",
+        "Photography and Video",
+        "Video Games and Consoles",
+        "Sound and Vision",
+        "Other Electronics and Home Appliances"
+      ]
+    },
+    {
+      name: "Animals and Pet Supplies",
+      items: [
+        "Aquariums",
+        "Animal Feeding, Care, Breeding, and Stabling",
+        "Horses",
+        "Horse and Riding Equipment",
+        "Insects and Spiders",
+        "Cages",
+        "Rodents and Rabbits",
+        "Fish",
+        "Cats",
+        "Cat Accessories",
+        "Dogs",
+        "Dog Accessories",
+        "Birds",
+        "Reptiles",
+        "Other Animals",
+        "Other Pet Supplies"
+      ]
+    },
+    {
+      name: "Furniture and Interior",
+      items: [
+        "Shelves and Dressers",
+        "Cabinets",
+        "Kitchenware and Tableware",
+        "Decorations and Interior Items",
+        "Bedroom",
+        "Carpets and Textiles",
+        "Tables and Chairs",
+        "Sofas and Armchairs",
+        "Lamps",
+        "Other Furniture and Interior"
+      ]
+    },
+    {
+      name: "Children and Parents",
+      items: [
+        "Children's Furniture",
+        "Children's Shoes",
+        "Children's Books",
+        "Children's Clothing",
+        "Children's Accessories and Safety",
+        "Strollers and Prams",
+        "Toys",
+        "Car Seats",
+        "Maternity Clothes",
+        "Other"
+      ]
+    },
+    {
+      name: "Business and Services",
+      items: [
+        "Presentation Equipment",
+        "Retail and Resale",
+        "Machinery and Spare Parts",
+        "Containers and Site Cabins",
+        "Agriculture",
+        "Freight and Cargo Transport",
+        "Construction and Renovation",
+        "Commercial Kitchen and Restaurant Industry",
+        "Health and First Aid",
+        "Office Supplies and Office Furniture",
+        "Web Domains and Phone Numbers",
+        "Other Business and Services"
+      ]
+    },
+    {
+      name: "Yard and Renovation",
+      items: [
+        "Garage Doors and Equipment",
+        "Alarms and Security",
+        "Kitchens",
+        "Bathroom and Sauna",
+        "Heating and Ventilation",
+        "Cabin Equipment",
+        "Yard and Garden",
+        "Building Materials and Renovation",
+        "Tools",
+        "Other Home, Garden, and Construction"
+      ]
+    },
+    {
+      name: "Sports and Outdoors",
+      items: [
+        "Extreme Sports",
+        "Fan Merchandise",
+        "Golf",
+        "Skiing and Snowboarding",
+        "Ice Hockey and Skating",
+        "Gym Equipment",
+        "Hunting, Fishing, and Outdoor Activities",
+        "Event Tickets",
+        "Ball Sports",
+        "Cycling",
+        "Dietary Supplements",
+        "Sports Watches and Activity Trackers",
+        "Sports Clothing and Shoes",
+        "Water Sports",
+        "Other Sports"
+      ]
+    },
+    {
+      name: "Clothing, Cosmetics, and Accessories",
+      items: [
+        "Skincare and Haircare",
+        "Watches and Wristwatches",
+        "Shoes",
+        "Jewelry and Jewelry Boxes",
+        "Cosmetics",
+        "Bags and Wallets",
+        "Men's Clothing",
+        "Costumes",
+        "Women's Clothing",
+        "Glasses and Lenses",
+        "Other Clothing, Cosmetics, and Accessories"
+      ]
+    },
+    {
+      name: "Entertainment and Hobbies",
+      items: [
+        "Food and Beverages",
+        "Collectibles",
+        "Books and Magazines",
+        "Handicrafts",
+        "Travel and Travel Tickets",
+        "Music and Movies",
+        "Model Kits and Building Sets",
+        "Radio-Controlled Toys",
+        "Board Games",
+        "Musical Instruments",
+        "Other Entertainment and Hobbies"
+      ]
+    }
+  ];
+
   // Track expanded categories
   const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
 
   // Toggle category expansion
   const toggleCategory = (categoryName: string) => {
     setExpandedCategories(prev => 
+      prev.includes(categoryName) 
+        ? prev.filter(name => name !== categoryName)
+        : [...prev, categoryName]
+    );
+  };
+
+  // Toggle category selection for multi-select
+  const toggleCategorySelection = (categoryName: string) => {
+    setSelectedCategories(prev => 
       prev.includes(categoryName) 
         ? prev.filter(name => name !== categoryName)
         : [...prev, categoryName]
@@ -198,9 +384,11 @@ export function ListingsFilter() {
     setEmailAddress("")
     setAdType1("")
     setAdType2("")
+    setSelectedCategories([])
     setAdvertiserType("")
     setModerationStatus("")
     setRegion("")
+    setCategoryDropdownOpen(false)
   }
 
   return (
@@ -384,30 +572,97 @@ export function ListingsFilter() {
             </div>
             <div className="col-span-12 md:col-span-4">
               <div className="flex items-center gap-1.5">
-                <span className="text-sm font-medium">Catergory</span>
+                <span className="text-sm font-medium">Category</span>
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <HelpCircle className="h-4 w-4 text-muted-foreground" />
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p>Filter by advertisement category</p>
+                      <p>Select multiple categories</p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               </div>
-              <Select value={adType2} onValueChange={setAdType2}>
-                <SelectTrigger className="mt-1.5 bg-background">
-                  <SelectValue placeholder="Select category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="electronics">Electronics</SelectItem>
-                  <SelectItem value="furniture">Furniture</SelectItem>
-                  <SelectItem value="clothing">Clothing</SelectItem>
-                  <SelectItem value="vehicles">Vehicles</SelectItem>
-                  <SelectItem value="real_estate">Real Estate</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="relative">
+                <DropdownMenu open={categoryDropdownOpen} onOpenChange={setCategoryDropdownOpen}>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="w-full mt-1.5 justify-between bg-background group">
+                      <div className="flex items-center justify-between w-full">
+                        <span className="truncate">
+                          {selectedCategories.length > 0 
+                            ? `${selectedCategories.length} selected` 
+                            : "Select categories"}
+                        </span>
+                        <ChevronDown className="h-4 w-4 opacity-50" />
+                      </div>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56 max-h-[400px] overflow-auto">
+                    {productCategories.map((category) => (
+                      <DropdownMenuSub key={category.name}>
+                        <DropdownMenuSubTrigger>
+                          <span>{category.name}</span>
+                        </DropdownMenuSubTrigger>
+                        <DropdownMenuPortal>
+                          <DropdownMenuSubContent className="max-h-[500px] overflow-auto">
+                            <DropdownMenuCheckboxItem 
+                              checked={selectedCategories.includes(category.name)}
+                              onCheckedChange={() => toggleCategorySelection(category.name)}
+                              onSelect={(e) => e.preventDefault()}
+                            >
+                              {category.name}
+                            </DropdownMenuCheckboxItem>
+                            <DropdownMenuSeparator />
+                            {category.items.map((item) => (
+                              <DropdownMenuCheckboxItem 
+                                key={item}
+                                checked={selectedCategories.includes(item)}
+                                onCheckedChange={() => toggleCategorySelection(item)}
+                                onSelect={(e) => e.preventDefault()}
+                              >
+                                {item}
+                              </DropdownMenuCheckboxItem>
+                            ))}
+                          </DropdownMenuSubContent>
+                        </DropdownMenuPortal>
+                      </DropdownMenuSub>
+                    ))}
+                    {selectedCategories.length > 0 && (
+                      <>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem 
+                          onClick={() => {
+                            setSelectedCategories([]);
+                            setCategoryDropdownOpen(false);
+                          }}
+                          className="justify-center text-center font-medium text-destructive focus:text-destructive"
+                        >
+                          Clear selections
+                        </DropdownMenuItem>
+                      </>
+                    )}
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem 
+                      onClick={() => setCategoryDropdownOpen(false)}
+                      className="justify-center text-center font-medium"
+                    >
+                      Done
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                {selectedCategories.length > 0 && (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setSelectedCategories([]);
+                    }}
+                    className="absolute right-8 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-700 text-sm font-medium"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>
