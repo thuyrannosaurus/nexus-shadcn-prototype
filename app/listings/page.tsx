@@ -2,6 +2,8 @@
 
 import { AppSidebar } from "@/components/app-sidebar"
 import { ListingsFilter } from "@/components/listings-filter"
+import { ListingItem } from "@/components/listing-item"
+import { listings } from "@/data/listings"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -18,7 +20,7 @@ import {
 } from "@/components/ui/sidebar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
-import { ChevronsDownUpIcon, ChevronsUpDownIcon, Download, Expand, FileDown, FileDownIcon, Minimize } from "lucide-react"
+import { Download, Expand, Minimize } from "lucide-react"
 import {
   Select,
   SelectContent,
@@ -32,6 +34,26 @@ import { useState } from "react"
 export default function ListingsPage() {
   const [isExpanded, setIsExpanded] = useState(false)
   const [sortOption, setSortOption] = useState("newest")
+
+  // Filter listings based on tab
+  const getFilteredListings = (tab: string) => {
+    switch (tab) {
+      case "all":
+        return listings
+      case "published":
+        return listings.filter(listing => listing.status === "Published")
+      case "inactive":
+        return listings.filter(listing => listing.status === "Inactive")
+      case "hidden":
+        return listings.filter(listing => listing.status === "Hidden")
+      case "unverified":
+        return listings.filter(listing => listing.status === "Unverified")
+      case "deleted":
+        return listings.filter(listing => listing.status === "Deleted")
+      default:
+        return listings
+    }
+  }
 
   return (
     <SidebarProvider>
@@ -59,16 +81,16 @@ export default function ListingsPage() {
                 <div className="flex items-end justify-between mb-4">
                   <TabsList className="overflow-x-auto">
                     <TabsTrigger value="all">All</TabsTrigger>
-                    <TabsTrigger value="published">Published (24)</TabsTrigger>
-                    <TabsTrigger value="inactive">Inactive (347)</TabsTrigger>
-                    <TabsTrigger value="hidden">Hidden</TabsTrigger>
-                    <TabsTrigger value="unverified">Unverified (3)</TabsTrigger>
-                    <TabsTrigger value="deleted">Deleted (4)</TabsTrigger>
+                    <TabsTrigger value="published">Published ({listings.filter(l => l.status === "Published").length})</TabsTrigger>
+                    <TabsTrigger value="inactive">Inactive ({listings.filter(l => l.status === "Inactive").length})</TabsTrigger>
+                    <TabsTrigger value="hidden">Hidden ({listings.filter(l => l.status === "Hidden").length})</TabsTrigger>
+                    <TabsTrigger value="unverified">Unverified ({listings.filter(l => l.status === "Unverified").length})</TabsTrigger>
+                    <TabsTrigger value="deleted">Deleted ({listings.filter(l => l.status === "Deleted").length})</TabsTrigger>
                   </TabsList>
                   
                   <div className="flex items-end gap-4">
                     <Button variant="outline" size="icon" title="Download">
-                      <FileDownIcon className="h-4 w-4" />
+                      <Download className="h-4 w-4" />
                     </Button>
                     <Button 
                       variant="outline" 
@@ -77,9 +99,9 @@ export default function ListingsPage() {
                       onClick={() => setIsExpanded(!isExpanded)}
                     >
                       {isExpanded ? (
-                        <ChevronsDownUpIcon className="h-4 w-4" />
+                        <Minimize className="h-4 w-4" />
                       ) : (
-                        <ChevronsUpDownIcon className="h-4 w-4" />
+                        <Expand className="h-4 w-4" />
                       )}
                     </Button>
                     
@@ -105,45 +127,93 @@ export default function ListingsPage() {
                 </div>
                 
                 <TabsContent value="all">
-                  <div className="min-h-[400px] rounded-xl border bg-card p-6">
-                    <div className="text-center text-muted-foreground">
-                      No listings found. Try adjusting your filters.
-                    </div>
+                  <div className="space-y-0">
+                    {getFilteredListings("all").length > 0 ? (
+                      getFilteredListings("all").map(listing => (
+                        <ListingItem key={listing.id} {...listing} />
+                      ))
+                    ) : (
+                      <div className="min-h-[400px] rounded-xl border bg-card p-6 flex items-center justify-center">
+                        <div className="text-center text-muted-foreground">
+                          No listings found. Try adjusting your filters.
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </TabsContent>
                 <TabsContent value="published">
-                  <div className="min-h-[400px] rounded-xl border bg-card p-6">
-                    <div className="text-center text-muted-foreground">
-                      No published listings found.
-                    </div>
+                  <div className="space-y-0">
+                    {getFilteredListings("published").length > 0 ? (
+                      getFilteredListings("published").map(listing => (
+                        <ListingItem key={listing.id} {...listing} />
+                      ))
+                    ) : (
+                      <div className="min-h-[400px] rounded-xl border bg-card p-6 flex items-center justify-center">
+                        <div className="text-center text-muted-foreground">
+                          No published listings found.
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </TabsContent>
                 <TabsContent value="inactive">
-                  <div className="min-h-[400px] rounded-xl border bg-card p-6">
-                    <div className="text-center text-muted-foreground">
-                      No inactive listings found.
-                    </div>
+                  <div className="space-y-0">
+                    {getFilteredListings("inactive").length > 0 ? (
+                      getFilteredListings("inactive").map(listing => (
+                        <ListingItem key={listing.id} {...listing} />
+                      ))
+                    ) : (
+                      <div className="min-h-[400px] rounded-xl border bg-card p-6 flex items-center justify-center">
+                        <div className="text-center text-muted-foreground">
+                          No inactive listings found.
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </TabsContent>
                 <TabsContent value="hidden">
-                  <div className="min-h-[400px] rounded-xl border bg-card p-6">
-                    <div className="text-center text-muted-foreground">
-                      No hidden listings found.
-                    </div>
+                  <div className="space-y-0">
+                    {getFilteredListings("hidden").length > 0 ? (
+                      getFilteredListings("hidden").map(listing => (
+                        <ListingItem key={listing.id} {...listing} />
+                      ))
+                    ) : (
+                      <div className="min-h-[400px] rounded-xl border bg-card p-6 flex items-center justify-center">
+                        <div className="text-center text-muted-foreground">
+                          No hidden listings found.
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </TabsContent>
                 <TabsContent value="unverified">
-                  <div className="min-h-[400px] rounded-xl border bg-card p-6">
-                    <div className="text-center text-muted-foreground">
-                      No unverified listings found.
-                    </div>
+                  <div className="space-y-0">
+                    {getFilteredListings("unverified").length > 0 ? (
+                      getFilteredListings("unverified").map(listing => (
+                        <ListingItem key={listing.id} {...listing} />
+                      ))
+                    ) : (
+                      <div className="min-h-[400px] rounded-xl border bg-card p-6 flex items-center justify-center">
+                        <div className="text-center text-muted-foreground">
+                          No unverified listings found.
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </TabsContent>
                 <TabsContent value="deleted">
-                  <div className="min-h-[400px] rounded-xl border bg-card p-6">
-                    <div className="text-center text-muted-foreground">
-                      No deleted listings found.
-                    </div>
+                  <div className="space-y-0">
+                    {getFilteredListings("deleted").length > 0 ? (
+                      getFilteredListings("deleted").map(listing => (
+                        <ListingItem key={listing.id} {...listing} />
+                      ))
+                    ) : (
+                      <div className="min-h-[400px] rounded-xl border bg-card p-6 flex items-center justify-center">
+                        <div className="text-center text-muted-foreground">
+                          No deleted listings found.
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </TabsContent>
               </Tabs>
