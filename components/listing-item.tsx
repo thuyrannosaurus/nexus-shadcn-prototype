@@ -12,7 +12,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { toast } from "sonner"
+import { useMemo } from "react"
 
 interface ListingItemProps {
   id: string
@@ -47,6 +54,24 @@ export function ListingItem({
     Hidden: "text-gray-400",
     Unverified: "text-amber-500",
     Deleted: "text-red-500"
+  }
+
+  // Generate a random 10-digit user ID
+  const userId = useMemo(() => {
+    return Math.floor(1000000000 + Math.random() * 9000000000).toString()
+  }, [])
+
+  // Truncate email in the middle
+  const truncateEmail = (email: string) => {
+    const parts = email.split('@')
+    if (parts.length !== 2) return email
+    
+    const username = parts[0]
+    const domain = parts[1]
+    
+    if (username.length <= 6) return email
+    
+    return `${username.substring(0, 3)}...@${domain}`
   }
 
   const copyToClipboard = (text: string, description: string) => {
@@ -113,7 +138,7 @@ export function ListingItem({
                 <span className="sr-only">More options</span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuContent align="end" className="w-72">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuGroup>
                 <DropdownMenuItem>
@@ -128,36 +153,100 @@ export function ListingItem({
                   <ExternalLink className="mr-2 h-4 w-4" />
                   <span>View on Site</span>
                 </DropdownMenuItem>
-                
+
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuLabel>Copy Information</DropdownMenuLabel>
               <DropdownMenuGroup>
-                <DropdownMenuItem onClick={() => copyToClipboard(id, "Listing ID")}>
-                  <Copy className="mr-2 h-4 w-4" />
-                  <span>Listing ID</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => copyToClipboard(title, "Listing title")}>
-                  <Copy className="mr-2 h-4 w-4" />
-                  <span>Listing Title</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => copyToClipboard(seller.name, "User name")}>
-                  <Copy className="mr-2 h-4 w-4" />
-                  <span>Username</span>
+                <DropdownMenuItem onClick={() => copyToClipboard(userId, "User ID")}>
+                  <div className="flex items-center justify-between w-full">
+                    <div className="flex items-center">
+                      <Copy className="mr-2 h-4 w-4" />
+                      <span>User ID</span>
+                    </div>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <span className="text-xs text-muted-foreground">
+                            {userId}
+                          </span>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{userId}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => copyToClipboard(seller.email, "Email address")}>
-                  <Copy className="mr-2 h-4 w-4" />
-                  <span>Email Address</span>
+                  <div className="flex items-center justify-between w-full">
+                    <div className="flex items-center">
+                      <Copy className="mr-2 h-4 w-4" />
+                      <span>Email Address</span>
+                    </div>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <span className="text-xs text-muted-foreground">
+                            {truncateEmail(seller.email)}
+                          </span>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{seller.email}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => copyToClipboard(id, "Listing ID")}>
+                  <div className="flex items-center justify-between w-full">
+                    <div className="flex items-center">
+                      <Copy className="mr-2 h-4 w-4" />
+                      <span>Listing ID</span>
+                    </div>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <span className="text-xs text-muted-foreground">
+                            {id.padStart(10, '0')}
+                          </span>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{id.padStart(10, '0')}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => copyToClipboard(title, "Listing title")}>
+                  <div className="flex items-center justify-between w-full">
+                    <div className="flex items-center">
+                      <Copy className="mr-2 h-4 w-4" />
+                      <span>Listing Title</span>
+                    </div>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <span className="text-xs text-muted-foreground truncate max-w-[100px]">
+                            {title.length > 15 ? title.substring(0, 15) + '...' : title}
+                          </span>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{title}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
                 </DropdownMenuItem>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                
+
                 <DropdownMenuItem>
                   <AlertTriangle className="mr-2 h-4 w-4 text-amber-500" />
                   <span>Flag for Review</span>
                 </DropdownMenuItem>
-                
+
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
