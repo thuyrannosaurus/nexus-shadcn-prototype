@@ -148,13 +148,13 @@ export function NavUser({
                     <SelectItem value="light">
                       <div className="flex items-center">
                         <Sun className="mr-2 h-4 w-4" />
-                        <span>Light theme</span>
+                        <span>Light</span>
                       </div>
                     </SelectItem>
                     <SelectItem value="dark">
                       <div className="flex items-center">
                         <Moon className="mr-2 h-4 w-4" />
-                        <span>Dark theme</span>
+                        <span>Dark</span>
                       </div>
                     </SelectItem>
                   </SelectContent>

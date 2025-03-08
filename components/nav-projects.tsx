@@ -29,6 +29,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { ExternalLinksDialog } from "@/components/external-links-dialog"
 
 export function NavProjects({
   projects,
@@ -57,15 +58,26 @@ export function NavProjects({
       <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
-            <SidebarMenuButton 
-              asChild
-              isActive={isUrlActive(item.url)}
-            >
-              <Link href={item.url}>
-                <item.icon />
-                <span>{item.name}</span>
-              </Link>
-            </SidebarMenuButton>
+            {item.name === "External links" ? (
+              <ExternalLinksDialog 
+                trigger={
+                  <SidebarMenuButton>
+                    <item.icon />
+                    <span>{item.name}</span>
+                  </SidebarMenuButton>
+                }
+              />
+            ) : (
+              <SidebarMenuButton 
+                asChild
+                isActive={isUrlActive(item.url)}
+              >
+                <Link href={item.url}>
+                  <item.icon />
+                  <span>{item.name}</span>
+                </Link>
+              </SidebarMenuButton>
+            )}
             {item.hasPopout && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
