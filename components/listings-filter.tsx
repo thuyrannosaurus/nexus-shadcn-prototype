@@ -424,7 +424,7 @@ export function ListingsFilter() {
               {(contentPreloaded || showMoreFilters) && (
                 <div className="space-y-4 pt-2 pb-4">
                   <div className={cn(
-                    "grid grid-cols-12 gap-4 transition-all duration-500 ease-in-out",
+                    "grid grid-cols-12 gap-4 transition-all duration-450 ease-in-out",
                     contentVisible 
                       ? "opacity-100 transform-none" 
                       : "opacity-0 transform translate-y-2"
