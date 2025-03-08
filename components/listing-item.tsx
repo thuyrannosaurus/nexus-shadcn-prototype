@@ -35,6 +35,7 @@ interface ListingItemProps {
   }
   image: string
   readyToShip?: boolean
+  isLast?: boolean
 }
 
 export function ListingItem({ 
@@ -46,7 +47,8 @@ export function ListingItem({
   location, 
   seller, 
   image,
-  readyToShip
+  readyToShip,
+  isLast = false
 }: ListingItemProps) {
   const statusColor = {
     Published: "text-green-600",
@@ -153,7 +155,7 @@ export function ListingItem({
                   <ExternalLink className="mr-2 h-4 w-4" />
                   <span>View on Site</span>
                 </DropdownMenuItem>
-
+                
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuLabel>Copy Information</DropdownMenuLabel>
@@ -227,8 +229,8 @@ export function ListingItem({
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <span className="text-xs text-muted-foreground truncate max-w-[100px]">
-                            {title.length > 15 ? title.substring(0, 15) + '...' : title}
+                          <span className="text-xs text-muted-foreground truncate max-w-[120px]">
+                            {title.length > 25 ? title.substring(0, 25) + '...' : title}
                           </span>
                         </TooltipTrigger>
                         <TooltipContent>
@@ -241,18 +243,18 @@ export function ListingItem({
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-
+                
                 <DropdownMenuItem>
                   <AlertTriangle className="mr-2 h-4 w-4 text-amber-500" />
                   <span>Flag for Review</span>
                 </DropdownMenuItem>
-
+                
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
       </div>
-      <Separator />
+      {!isLast && <Separator />}
     </div>
   )
 } 
