@@ -115,7 +115,7 @@ export function UserHoverCard({ name, email, type, children }: UserHoverCardProp
     <HoverCard openDelay={100} closeDelay={200}>
       <HoverCardTrigger asChild>
         {children || (
-          <span className="text-blue-600 hover:underline cursor-pointer">
+          <span className="text-primary hover:underline cursor-pointer">
             {name}
           </span>
         )}
@@ -142,7 +142,7 @@ export function UserHoverCard({ name, email, type, children }: UserHoverCardProp
                     <span className="text-xs font-medium">Admin</span>
                   </Badge>
                 ) : (
-                  <Badge variant="outline" className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900 px-2">
+                  <Badge variant="outline" className="bg-primary/10 dark:bg-primary/20 text-primary hover:bg-primary/10 dark:hover:bg-primary/20 px-2">
                     <span className="text-xs font-medium">{type}</span>
                   </Badge>
                 )}

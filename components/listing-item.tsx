@@ -113,7 +113,7 @@ export function ListingItem({
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
             <div>
-              <h3 className="text-sm font-medium leading-none text-blue-600">
+              <h3 className="text-sm font-medium leading-none text-primary">
                 {title}
               </h3>
               <p className="text-sm font-bold mt-1">{price}</p>
@@ -128,7 +128,7 @@ export function ListingItem({
           </div>
           <div className="mt-4">
             <UserHoverCard name={seller.name} email={seller.email} type={seller.type}>
-              <span className="text-xs text-blue-600 hover:underline cursor-pointer">
+              <span className="text-xs text-primary hover:underline cursor-pointer">
                 {seller.name}
               </span>
             </UserHoverCard>
