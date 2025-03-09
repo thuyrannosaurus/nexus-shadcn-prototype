@@ -14,6 +14,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { QuickSearch } from "@/components/quick-search"
 
 export default function RecommercePage() {
   return (
@@ -37,6 +38,7 @@ export default function RecommercePage() {
             </Breadcrumb>
           </div>
           <div className="flex items-center gap-2 px-4">
+            <QuickSearch />
             <ThemeToggle />
           </div>
         </header>
