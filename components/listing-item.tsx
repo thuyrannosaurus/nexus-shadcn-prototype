@@ -73,7 +73,7 @@ export function ListingItem({
     
     if (username.length <= 6) return email
     
-    return `${username.substring(0, 3)}...@${domain}`
+    return `${username.substring(0, 8)}...@${domain}`
   }
 
   const copyToClipboard = (text: string, description: string) => {
@@ -93,9 +93,9 @@ export function ListingItem({
         <div className="relative w-32 h-24 overflow-hidden rounded-lg border border-gray-200 shrink-0">
           {readyToShip && (
             <div className="absolute top-0 left-0 z-10 rounded-tl-md rounded-br-lg overflow-hidden">
-              <div className="bg-amber-100 text-black px-2 py-1.5 flex items-center gap-1.5">
-                <Truck className="h-4 w-4" />
-                <span className="text-xs font-medium">Fiks ferdig</span>
+              <div className="bg-amber-100 text-black px-2 py-1.5 flex items-center gap-1">
+                <Truck className="h-4 w-4 text-amber-900" />
+                <span className="text-xs font-medium text-amber-900">Fiks ferdig</span>
               </div>
             </div>
           )}
@@ -128,7 +128,7 @@ export function ListingItem({
           </div>
         </div>
         <div className="shrink-0 self-center">
-          <Button variant="outline" className="text-xs text-blue-600 border-blue-200 hover:bg-blue-50 hover:text-blue-700">
+          <Button variant="outline" className="text-xs">
             Preview
           </Button>
         </div>
@@ -140,7 +140,7 @@ export function ListingItem({
                 <span className="sr-only">More options</span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-72">
+            <DropdownMenuContent align="end" className="w-80">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuGroup>
                 <DropdownMenuItem>
@@ -155,100 +155,63 @@ export function ListingItem({
                   <ExternalLink className="mr-2 h-4 w-4" />
                   <span>View on Site</span>
                 </DropdownMenuItem>
-                
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuLabel>Copy Information</DropdownMenuLabel>
               <DropdownMenuGroup>
                 <DropdownMenuItem onClick={() => copyToClipboard(userId, "User ID")}>
-                  <div className="flex items-center justify-between w-full">
-                    <div className="flex items-center">
-                      <Copy className="mr-2 h-4 w-4" />
-                      <span>User ID</span>
-                    </div>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <span className="text-xs text-muted-foreground">
-                            {userId}
-                          </span>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{userId}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
+                  <Copy className="mr-2 h-4 w-4" />
+                  <span>User ID</span>
+                  <span className="ml-auto text-xs text-muted-foreground">
+                    {userId}
+                  </span>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => copyToClipboard(seller.email, "Email address")}>
-                  <div className="flex items-center justify-between w-full">
-                    <div className="flex items-center">
-                      <Copy className="mr-2 h-4 w-4" />
-                      <span>Email Address</span>
-                    </div>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <span className="text-xs text-muted-foreground">
-                            {truncateEmail(seller.email)}
-                          </span>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{seller.email}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
+                  <Copy className="mr-2 h-4 w-4" />
+                  <span>Email Address</span>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <span className="ml-auto text-xs text-muted-foreground truncate max-w-[160px]">
+                          {truncateEmail(seller.email)}
+                        </span>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{seller.email}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => copyToClipboard(id, "Listing ID")}>
-                  <div className="flex items-center justify-between w-full">
-                    <div className="flex items-center">
-                      <Copy className="mr-2 h-4 w-4" />
-                      <span>Listing ID</span>
-                    </div>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <span className="text-xs text-muted-foreground">
-                            {id.padStart(10, '0')}
-                          </span>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{id.padStart(10, '0')}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
+                  <Copy className="mr-2 h-4 w-4" />
+                  <span>Listing ID</span>
+                  <span className="ml-auto text-xs text-muted-foreground">
+                    {id.padStart(10, '0')}
+                  </span>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => copyToClipboard(title, "Listing title")}>
-                  <div className="flex items-center justify-between w-full">
-                    <div className="flex items-center">
-                      <Copy className="mr-2 h-4 w-4" />
-                      <span>Listing Title</span>
-                    </div>
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <span className="text-xs text-muted-foreground truncate max-w-[120px]">
-                            {title.length > 25 ? title.substring(0, 25) + '...' : title}
-                          </span>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{title}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </div>
+                  <Copy className="mr-2 h-4 w-4" />
+                  <span>Listing Title</span>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <span className="ml-auto text-xs text-muted-foreground truncate max-w-[160px]">
+                          {title.length > 25 ? title.substring(0, 18) + '...' : title}
+                        </span>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{title}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </DropdownMenuItem>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                
                 <DropdownMenuItem>
                   <AlertTriangle className="mr-2 h-4 w-4 text-amber-500" />
                   <span>Flag for Review</span>
                 </DropdownMenuItem>
-                
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
