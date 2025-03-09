@@ -99,3 +99,20 @@
   }
 }
 
+/* Ensure hover card always appears above other elements */
+[data-radix-hover-card-content] {
+  z-index: 9999 !important;
+  position: relative !important;
+}
+
+/* Force hover card to display at the top */
+[data-side="top"] {
+  transform-origin: bottom center !important;
+}
+
+/* Remove the hover card CSS */
+/* [data-radix-hover-card-content] {
+  z-index: 9999 !important;
+  position: relative;
+} */
+

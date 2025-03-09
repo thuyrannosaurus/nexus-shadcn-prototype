@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/tooltip"
 import { toast } from "sonner"
 import { useMemo } from "react"
+import { UserHoverCard } from "./user-hover-card"
 
 interface ListingItemProps {
   id: string
@@ -36,6 +37,7 @@ interface ListingItemProps {
   image: string
   readyToShip?: boolean
   isLast?: boolean
+  description?: string
 }
 
 export function ListingItem({ 
@@ -48,7 +50,8 @@ export function ListingItem({
   seller, 
   image,
   readyToShip,
-  isLast = false
+  isLast = false,
+  description
 }: ListingItemProps) {
   const statusColor = {
     Published: "text-green-600",
@@ -93,7 +96,7 @@ export function ListingItem({
         <div className="relative w-32 h-24 overflow-hidden rounded-lg border border-gray-200 shrink-0">
           {readyToShip && (
             <div className="absolute top-0 left-0 z-10 rounded-tl-md rounded-br-lg overflow-hidden">
-              <div className="bg-amber-100 text-black px-2 py-1.5 flex items-center gap-1">
+              <div className="bg-amber-100 text-black px-2 py-1.5 flex items-center gap-1.5">
                 <Truck className="h-4 w-4 text-amber-900" />
                 <span className="text-xs font-medium text-amber-900">Fiks ferdig</span>
               </div>
@@ -110,7 +113,9 @@ export function ListingItem({
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
             <div>
-              <h3 className="text-sm font-medium leading-none text-blue-600">{title}</h3>
+              <h3 className="text-sm font-medium leading-none text-blue-600">
+                {title}
+              </h3>
               <p className="text-sm font-bold mt-1">{price}</p>
             </div>
           </div>
@@ -122,7 +127,11 @@ export function ListingItem({
             <span className="text-xs text-muted-foreground">{location}</span>
           </div>
           <div className="mt-4">
-            <p className="text-sm font-medium text-blue-600">{seller.name}</p>
+            <UserHoverCard name={seller.name} email={seller.email} type={seller.type}>
+              <span className="text-xs text-blue-600 hover:underline cursor-pointer">
+                {seller.name}
+              </span>
+            </UserHoverCard>
             <p className="text-xs text-muted-foreground">{seller.email}</p>
             <p className="text-xs text-muted-foreground mt-1">{seller.type}</p>
           </div>
@@ -162,9 +171,18 @@ export function ListingItem({
                 <DropdownMenuItem onClick={() => copyToClipboard(userId, "User ID")}>
                   <Copy className="mr-2 h-4 w-4" />
                   <span>User ID</span>
-                  <span className="ml-auto text-xs text-muted-foreground">
-                    {userId}
-                  </span>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <span className="ml-auto text-xs text-muted-foreground">
+                          {userId}
+                        </span>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{userId}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => copyToClipboard(seller.email, "Email address")}>
                   <Copy className="mr-2 h-4 w-4" />
@@ -185,9 +203,18 @@ export function ListingItem({
                 <DropdownMenuItem onClick={() => copyToClipboard(id, "Listing ID")}>
                   <Copy className="mr-2 h-4 w-4" />
                   <span>Listing ID</span>
-                  <span className="ml-auto text-xs text-muted-foreground">
-                    {id.padStart(10, '0')}
-                  </span>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <span className="ml-auto text-xs text-muted-foreground">
+                          {id.padStart(10, '0')}
+                        </span>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{id.padStart(10, '0')}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => copyToClipboard(title, "Listing title")}>
                   <Copy className="mr-2 h-4 w-4" />
