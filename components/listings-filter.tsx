@@ -44,6 +44,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuCheckboxItem,
 } from "@/components/ui/dropdown-menu"
+import { RegionSelector } from "@/components/region-selector"
 
 export function ListingsFilter() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -706,20 +707,9 @@ export function ListingsFilter() {
                     </div>
                     <div className="col-span-12 md:col-span-4">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-sm font-medium">Region</span>
+                        <span className="text-sm font-medium mb-1.5">Region</span>
                       </div>
-                      <Select value={region} onValueChange={setRegion}>
-                        <SelectTrigger className="mt-1.5 bg-background">
-                          <SelectValue placeholder="Select region" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="east">East</SelectItem>
-                          <SelectItem value="west">West</SelectItem>
-                          <SelectItem value="north">North</SelectItem>
-                          <SelectItem value="south">South</SelectItem>
-                          <SelectItem value="central">Central</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <RegionSelector value={region} onChange={setRegion} />
                     </div>
                   </div>
                 </div>
