@@ -26,7 +26,7 @@ export default function MobilityPage() {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
-                  <BreadcrumbLink href="/listings" className="text-blue-600 hover:underline">Listings</BreadcrumbLink>
+                  <BreadcrumbLink href="/listings" className="text-primary hover:underline">Listings</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>

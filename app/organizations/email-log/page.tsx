@@ -26,7 +26,7 @@ export default function EmailLogPage() {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
-                  <BreadcrumbLink href="/organizations" className="text-blue-600 hover:underline">Organizations</BreadcrumbLink>
+                  <BreadcrumbLink href="/organizations" className="text-primary hover:underline">Organizations</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
