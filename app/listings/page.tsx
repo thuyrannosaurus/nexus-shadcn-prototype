@@ -41,6 +41,7 @@ import {
 import { useState, useEffect, useRef } from "react"
 import { ListingSkeleton } from "@/components/listing-skeleton"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { QuickSearch } from "@/components/quick-search"
 
 export default function ListingsPage() {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -263,7 +264,8 @@ export default function ListingsPage() {
               </BreadcrumbList>
             </Breadcrumb>
           </div>
-          <div className="flex items-center gap-2 px-4 text-muted-foreground">
+          <div className="flex items-center gap-2 px-4">
+            <QuickSearch />
             <ThemeToggle />
           </div>
         </header>
