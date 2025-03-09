@@ -55,8 +55,8 @@ export function ListingItem({
 }: ListingItemProps) {
   const statusColor = {
     Published: "text-green-600",
-    Inactive: "text-gray-500",
-    Hidden: "text-gray-400",
+    Inactive: "text-muted-foreground",
+    Hidden: "text-muted-foreground/70",
     Unverified: "text-amber-500",
     Deleted: "text-red-500"
   }
@@ -93,7 +93,7 @@ export function ListingItem({
   return (
     <div className="w-full">
       <div className="flex items-start gap-4 px-4 py-6 hover:bg-muted/30 transition-colors">
-        <div className="relative w-32 h-24 overflow-hidden rounded-lg border border-gray-200 shrink-0">
+        <div className="relative w-32 h-24 overflow-hidden rounded-lg border border-border shrink-0">
           {readyToShip && (
             <div className="absolute top-0 left-0 z-10 rounded-tl-md rounded-br-lg overflow-hidden">
               <div className="bg-amber-100 text-black px-2 py-1.5 flex items-center gap-1.5">
@@ -113,8 +113,15 @@ export function ListingItem({
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
             <div>
-              <h3 className="text-sm font-medium leading-none text-primary">
-                {title}
+              <h3 className="text-sm font-medium leading-none">
+                <a 
+                  href="#" 
+                  className="text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
+                  tabIndex={0}
+                  aria-label={`View listing: ${title}`}
+                >
+                  {title}
+                </a>
               </h3>
               <p className="text-sm font-bold mt-1">{price}</p>
             </div>
@@ -128,16 +135,25 @@ export function ListingItem({
           </div>
           <div className="mt-4">
             <UserHoverCard name={seller.name} email={seller.email} type={seller.type}>
-              <span className="text-xs text-primary hover:underline cursor-pointer">
+              <a 
+                href="#" 
+                className="text-xs text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
+                tabIndex={0}
+                aria-label={`View seller: ${seller.name}`}
+              >
                 {seller.name}
-              </span>
+              </a>
             </UserHoverCard>
             <p className="text-xs text-muted-foreground">{seller.email}</p>
             <p className="text-xs text-muted-foreground mt-1">{seller.type}</p>
           </div>
         </div>
         <div className="shrink-0 self-center">
-          <Button variant="outline" className="text-xs">
+          <Button 
+            variant="outline" 
+            className="text-xs"
+            aria-label={`Preview listing: ${title}`}
+          >
             Preview
           </Button>
         </div>
@@ -152,15 +168,24 @@ export function ListingItem({
             <DropdownMenuContent align="end" className="w-80">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuGroup>
-                <DropdownMenuItem>
+                <DropdownMenuItem 
+                  onSelect={() => {}} 
+                  aria-label="Go to listing details"
+                >
                   <FileText className="mr-2 h-4 w-4" />
                   <span>Go to Listing Details</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem 
+                  onSelect={() => {}} 
+                  aria-label="Go to user details"
+                >
                   <User className="mr-2 h-4 w-4" />
                   <span>Go to User Details</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem 
+                  onSelect={() => {}} 
+                  aria-label="View listing on site"
+                >
                   <ExternalLink className="mr-2 h-4 w-4" />
                   <span>View on Site</span>
                 </DropdownMenuItem>
@@ -174,7 +199,12 @@ export function ListingItem({
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <span className="ml-auto text-xs text-muted-foreground">
+                        <span 
+                          className="ml-auto text-xs text-muted-foreground"
+                          tabIndex={0}
+                          role="button"
+                          aria-label={`User ID: ${userId}`}
+                        >
                           {userId}
                         </span>
                       </TooltipTrigger>
@@ -190,7 +220,12 @@ export function ListingItem({
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <span className="ml-auto text-xs text-muted-foreground truncate max-w-[160px]">
+                        <span 
+                          className="ml-auto text-xs text-muted-foreground truncate max-w-[160px]"
+                          tabIndex={0}
+                          role="button"
+                          aria-label={`Email: ${seller.email}`}
+                        >
                           {truncateEmail(seller.email)}
                         </span>
                       </TooltipTrigger>
@@ -206,7 +241,12 @@ export function ListingItem({
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <span className="ml-auto text-xs text-muted-foreground">
+                        <span 
+                          className="ml-auto text-xs text-muted-foreground"
+                          tabIndex={0}
+                          role="button"
+                          aria-label={`Listing ID: ${id.padStart(10, '0')}`}
+                        >
                           {id.padStart(10, '0')}
                         </span>
                       </TooltipTrigger>
@@ -222,7 +262,12 @@ export function ListingItem({
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <span className="ml-auto text-xs text-muted-foreground truncate max-w-[160px]">
+                        <span 
+                          className="ml-auto text-xs text-muted-foreground truncate max-w-[160px]"
+                          tabIndex={0}
+                          role="button"
+                          aria-label={`Listing title: ${title}`}
+                        >
                           {title.length > 25 ? title.substring(0, 18) + '...' : title}
                         </span>
                       </TooltipTrigger>
@@ -235,7 +280,10 @@ export function ListingItem({
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                <DropdownMenuItem>
+                <DropdownMenuItem 
+                  onSelect={() => {}} 
+                  aria-label="Flag listing for review"
+                >
                   <AlertTriangle className="mr-2 h-4 w-4 text-amber-500" />
                   <span>Flag for Review</span>
                 </DropdownMenuItem>

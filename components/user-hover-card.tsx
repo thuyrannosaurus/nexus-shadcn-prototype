@@ -148,7 +148,12 @@ export function UserHoverCard({ name, email, type, children }: UserHoverCardProp
                 )}
               </div>
             </div>
-            <Button variant="ghost" size="icon" className="h-6 w-6">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="h-6 w-6"
+              aria-label="View user details in new window"
+            >
               <ExternalLink className="h-4 w-4" />
             </Button>
           </div>
@@ -194,6 +199,7 @@ export function UserHoverCard({ name, email, type, children }: UserHoverCardProp
             size="sm" 
             className="w-full text-xs"
             onClick={() => copyToClipboard(userId, "User ID")}
+            aria-label={`Copy user ID: ${userId}`}
           >
             <Copy className="mr-2 h-3 w-3" />
             Copy User ID
@@ -202,6 +208,7 @@ export function UserHoverCard({ name, email, type, children }: UserHoverCardProp
             variant="outline" 
             size="sm" 
             className="w-full text-xs"
+            aria-label={`View details for ${name}`}
           >
             <ExternalLink className="mr-2 h-3 w-3" />
             View Details
