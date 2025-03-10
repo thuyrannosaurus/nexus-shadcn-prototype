@@ -23,6 +23,7 @@ import { ArrowDownWideNarrow, Download, Filter, FilterIcon, MoreHorizontal, Sear
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 interface ListingsToolbarProps {
   variant?: "default" | "compact"
@@ -235,14 +236,16 @@ export function ListingsToolbar({ variant = "default" }: ListingsToolbarProps) {
       {/* Example content to demonstrate the "Show descriptions" toggle */}
       <div className="grid gap-4">
         {[1, 2, 3].map((item) => (
-          <div key={item} className="rounded-lg border p-4">
-            <h3 className="font-medium">Example Listing {item}</h3>
-            {showDescriptions && (
-              <p className="mt-1 text-sm text-muted-foreground">
-                This is a description for the listing. It will only show when the "Show descriptions" toggle is enabled.
-              </p>
-            )}
-          </div>
+          <Card key={item}>
+            <CardHeader>
+              <CardTitle className="text-base">Example Listing {item}</CardTitle>
+              {showDescriptions && (
+                <CardDescription>
+                  This is a description for the listing. It will only show when the "Show descriptions" toggle is enabled.
+                </CardDescription>
+              )}
+            </CardHeader>
+          </Card>
         ))}
       </div>
     </div>

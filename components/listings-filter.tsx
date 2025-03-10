@@ -393,8 +393,8 @@ export function ListingsFilter() {
   }
 
   return (
-    <Card className="bg-muted/50 border-0">
-      <CardContent className="p-6 space-y-6">
+    <Card >
+      <CardContent className="bg-muted/35 p-8 space-y-8">
         <div className="grid grid-cols-12 gap-4">
           <div className="col-span-12 md:col-span-6">
             <div className="flex items-center gap-1.5">
