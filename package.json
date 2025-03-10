@@ -2,7 +2,7 @@
   "name": "nexus-shadcn-prototype",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://thuy-gia-nguyen.github.io/nexus-shadcn-prototype",
+  "homepage": "https://thuyrannosaurus.github.io/nexus-shadcn-prototype",
   "scripts": {
     "dev": "next dev",
     "build": "next build --no-lint",

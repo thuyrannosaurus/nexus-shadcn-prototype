@@ -34,27 +34,27 @@ const data = {
   user: {
     name: "Thuy",
     email: "thuyrannosaurus@finn.no",
-    avatar: "/avatars/shadcn.jpg",
+    avatar: "/nexus-shadcn-prototype/avatars/shadcn.jpg",
   },
   teams: [
     {
       name: "FINN.no",
-      logo: "/logos/logo-finn.png",
+      logo: "/nexus-shadcn-prototype/logos/logo-finn.png",
       plan: "Nexus",
     },
     {
       name: "Blocket.se",
-      logo: "/logos/logo-blocket.png",
+      logo: "/nexus-shadcn-prototype/logos/logo-blocket.png",
       plan: "Nexus",
     },
     {
       name: "Tori.fi",
-      logo: "/logos/logo-tori.png",
+      logo: "/nexus-shadcn-prototype/logos/logo-tori.png",
       plan: "Nexus",
     },
     {
       name: "DBA.dk",
-      logo: "/logos/logo-dba.png",
+      logo: "/nexus-shadcn-prototype/logos/logo-dba.png",
       plan: "Nexus",
     },
   ],
