@@ -28,33 +28,34 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { getAssetPath } from "@/utils/path"
 
 // This is sample data.
 const data = {
   user: {
     name: "Thuy",
     email: "thuyrannosaurus@finn.no",
-    avatar: "/nexus-shadcn-prototype/avatars/shadcn.jpg",
+    avatar: getAssetPath("/avatars/shadcn.jpg"),
   },
   teams: [
     {
       name: "FINN.no",
-      logo: "/nexus-shadcn-prototype/logos/logo-finn.png",
+      logo: getAssetPath("/logos/logo-finn.png"),
       plan: "Nexus",
     },
     {
       name: "Blocket.se",
-      logo: "/nexus-shadcn-prototype/logos/logo-blocket.png",
+      logo: getAssetPath("/logos/logo-blocket.png"),
       plan: "Nexus",
     },
     {
       name: "Tori.fi",
-      logo: "/nexus-shadcn-prototype/logos/logo-tori.png",
+      logo: getAssetPath("/logos/logo-tori.png"),
       plan: "Nexus",
     },
     {
       name: "DBA.dk",
-      logo: "/nexus-shadcn-prototype/logos/logo-dba.png",
+      logo: getAssetPath("/logos/logo-dba.png"),
       plan: "Nexus",
     },
   ],

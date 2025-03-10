@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  // Configure the base path for GitHub Pages
+  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
+  // Configure the base path for GitHub Pages only in production
   // Replace 'nexus-shadcn-prototype' with your repository name
-  basePath: '/nexus-shadcn-prototype',
+  basePath: process.env.NODE_ENV === 'production' ? '/nexus-shadcn-prototype' : '',
   // Disable image optimization since it's not supported in static exports
   images: {
     unoptimized: true,

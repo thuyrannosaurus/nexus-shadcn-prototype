@@ -16,7 +16,17 @@ import {
   Sun,
   SunMoon,
   Moon,
+  Palette,
+  ChevronRight,
+  Layers,
+  Shapes,
+  Paintbrush,
+  Wand2,
+  Lightbulb,
+  ListFilter,
+  List,
 } from "lucide-react"
+import Link from "next/link"
 
 import {
   Avatar,
@@ -163,7 +173,58 @@ export function NavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <DropdownMenuItem className="flex cursor-default justify-between">
+                    <div className="flex items-center gap-2">
+                      <Palette className="mr-2 h-4 w-4" />
+                      Design Experiments
+                    </div>
+                    <ChevronRight className="h-4 w-4" />
+                  </DropdownMenuItem>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56 rounded-lg" side="right" sideOffset={1}>
+                  <DropdownMenuLabel>Interactive Elements</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href="/design-experiments/listings-toolbar">
+                      <List className="mr-2 h-4 w-4" />
+                      Listings Toolbar
+                    </Link>
+                  </DropdownMenuItem>
+                  {/*<DropdownMenuItem asChild>
+                    <Link href="/design-experiments/buttons">
+                      <Shapes className="mr-2 h-4 w-4" />
+                      Buttons & Controls
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/design-experiments/cards">
+                      <Layers className="mr-2 h-4 w-4" />
+                      Card Layouts
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/design-experiments/animations">
+                      <Wand2 className="mr-2 h-4 w-4" />
+                      Animations
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/design-experiments/color-system">
+                      <Paintbrush className="mr-2 h-4 w-4" />
+                      Color System
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/design-experiments/prototypes">
+                      <Lightbulb className="mr-2 h-4 w-4" />
+                      Prototypes
+                    </Link>
+                  </DropdownMenuItem>*/}
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <DropdownMenuItem> 
                 <BotMessageSquare className="mr-2 h-4 w-4" />
                 Try Nexus Chatbot
               </DropdownMenuItem>

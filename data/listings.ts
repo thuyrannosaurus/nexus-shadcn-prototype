@@ -1,3 +1,5 @@
+import { getAssetPath } from "@/utils/path"
+
 export interface Listing {
   id: string
   title: string
@@ -28,7 +30,7 @@ export const listings: Listing[] = [
       email: "anders.johansen@gmail.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/gameboy-console.jpg",
+    image: getAssetPath("/images/listing-images/gameboy-console.jpg"),
     readyToShip: true,
     description: "Original Nintendo Game Boy from 1989 in excellent condition. The screen is clear with no dead pixels, and all buttons work perfectly. Comes with the original battery cover and has been thoroughly cleaned and tested. This classic handheld console is perfect for collectors or retro gaming enthusiasts. Battery life is still impressive, and it comes with Tetris game cartridge. Minor scratches on the back but nothing that affects gameplay. This is a piece of gaming history that still provides hours of fun!"
   },
@@ -44,7 +46,7 @@ export const listings: Listing[] = [
       email: "elsa.lindberg@hotmail.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/Tiger-Electronics-2.jpg",
+    image: getAssetPath("/images/listing-images/Tiger-Electronics-2.jpg"),
     description: "Vintage Tiger Electronics handheld game from the early 90s. This is the classic Batman version that was incredibly popular back in the day. The game is in working condition with some minor wear from normal use. The screen is clear, and the sound still works perfectly. Batteries not included. These Tiger handhelds are becoming increasingly collectible as nostalgic items from the 90s. Great addition to any vintage electronics collection!"
   },
   {
@@ -59,7 +61,7 @@ export const listings: Listing[] = [
       email: "magnus.olsen@finn.no",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/ex498gntqqq21.jpg",
+    image: getAssetPath("/images/listing-images/ex498gntqqq21.jpg"),
     description: "Sega Game Gear in good working condition. This portable console was Sega's answer to the Game Boy and features a color screen. This unit has been refurbished with new capacitors, solving the common screen and sound issues these consoles develop over time. Comes with Sonic the Hedgehog game cartridge and the original AC adapter. The battery compartment is clean with no corrosion. Some light scratches on the case but the screen is in excellent condition. A great piece of gaming history!"
   },
   {
@@ -74,7 +76,7 @@ export const listings: Listing[] = [
       email: "freya.nielsen@gmail.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/f9055mnaons81.jpg",
+    image: getAssetPath("/images/listing-images/f9055mnaons81.jpg"),
     description: "Complete in box Nintendo Game Boy Color in the iconic teal blue color. This set includes the original box, manuals, inserts, and the console itself in pristine condition. The screen has no scratches, and all buttons are responsive. Comes with Pokémon Blue game cartridge. The box shows minimal shelf wear but is in remarkable condition for its age. Battery compartment is clean with no corrosion. This is a collector's dream piece - rarely found in such complete condition."
   },
   {
@@ -89,7 +91,7 @@ export const listings: Listing[] = [
       email: "bjorn.svensson@outlook.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/oyz8q4vhe1u21.jpg",
+    image: getAssetPath("/images/listing-images/oyz8q4vhe1u21.jpg"),
     description: "Sony PSP 1000 (the original model) in black. Console is in good working condition with some minor scratches on the body and screen from normal use. Battery still holds a decent charge. Comes with 5 games: God of War: Chains of Olympus, Gran Turismo, Tekken: Dark Resurrection, Lumines, and Ridge Racer. Also includes charger, case, and 4GB memory stick. UMD drive works perfectly. This is the perfect starter kit for anyone looking to get into PSP collecting or retro gaming on the go."
   },
   {
@@ -104,7 +106,7 @@ export const listings: Listing[] = [
       email: "annika.virtanen@yahoo.com",
       type: "Business"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/s-l400.jpg",
+    image: getAssetPath("/images/listing-images/s-l400.jpg"),
     description: "Rare Nintendo Virtual Boy in working condition. This unique 3D gaming console from 1995 was a commercial failure but has become a highly sought-after collector's item. The unit has been tested and all functions work correctly. The red LED display is clear and bright with no dead pixels. Comes with the original controller, stand, and Mario's Tennis game. Some light wear on the body but overall in excellent condition for its age. A true conversation piece and must-have for serious Nintendo collectors."
   },
   {
@@ -119,7 +121,7 @@ export const listings: Listing[] = [
       email: "lars.eriksen@gmail.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/vgmmzjz9orsyt8imcwwd.jpg",
+    image: getAssetPath("/images/listing-images/vgmmzjz9orsyt8imcwwd.jpg"),
     readyToShip: true,
     description: "Nintendo DS Lite in white, in perfect working condition. Both screens are pristine with no scratches or dead pixels. All buttons, hinges, and speakers work flawlessly. Battery holds a charge for 5-6 hours of gameplay. Comes with charger, stylus, and 3 games: New Super Mario Bros, Animal Crossing: Wild World, and Nintendogs. The console has been kept in a protective case its entire life and looks almost new. Ready to ship immediately in secure packaging."
   },
@@ -135,7 +137,7 @@ export const listings: Listing[] = [
       email: "ingrid.bergstrom@telia.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/60a071a6d8ce7cb882cadc93fbb2313e.jpg",
+    image: getAssetPath("/images/listing-images/60a071a6d8ce7cb882cadc93fbb2313e.jpg"),
     description: "Rare Bandai WonderSwan handheld console, Japanese import in the original pearl white color. This unique handheld was designed by Gunpei Yokoi (creator of the Game Boy) and was only released in Japan. The console is in excellent condition with minimal signs of use. Screen is clear and all buttons are responsive. Comes with Final Fantasy I game cartridge and original box. The WonderSwan's unique vertical/horizontal gameplay orientation makes it a fascinating piece of gaming history. A must-have for serious collectors of Japanese gaming hardware."
   },
   {
@@ -150,7 +152,7 @@ export const listings: Listing[] = [
       email: "soren.andersen@gmail.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/techtalk-gameboy-header.jpg",
+    image: getAssetPath("/images/listing-images/techtalk-gameboy-header.jpg"),
     description: "Limited edition Nintendo Game Boy Advance SP with the rare Tribal pattern. This special edition console features a unique silver case with tribal tattoo-inspired black graphics. The front-lit screen works perfectly and is bright and clear. Hinges are tight and all buttons are responsive. Battery holds a charge for approximately 8 hours. Comes with charger and Zelda: The Minish Cap game. Some light scratches on the outer case but overall in excellent condition. These limited edition designs are becoming increasingly collectible."
   },
   {
@@ -165,7 +167,7 @@ export const listings: Listing[] = [
       email: "gunnar.sigurdsson@hotmail.com",
       type: "Business"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/kTCefaNg.png",
+    image: getAssetPath("/images/listing-images/kTCefaNg.png"),
     readyToShip: true,
     description: "Vintage Atari Lynx handheld console from 1989 - the world's first handheld with a color LCD screen. This is the original model (Lynx I) with the horizontal orientation. The console has been professionally restored with new capacitors and a modern LCD screen upgrade that preserves the original look but provides better brightness and battery life. Comes with power adapter, carrying case, and three games: California Games, Chip's Challenge, and Gates of Zendocon. A true piece of gaming history in excellent working condition."
   },
@@ -181,7 +183,7 @@ export const listings: Listing[] = [
       email: "petter.solberg@gmail.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/gameboy-console.jpg",
+    image: getAssetPath("/images/listing-images/gameboy-console.jpg"),
     readyToShip: true
   },
   {
@@ -196,7 +198,7 @@ export const listings: Listing[] = [
       email: "mikko.koivisto@yahoo.com",
       type: "Business"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/s-l400.jpg"
+    image: getAssetPath("/images/listing-images/s-l400.jpg")
   },
   {
     id: "23",
@@ -210,7 +212,7 @@ export const listings: Listing[] = [
       email: "trond.hansen@finn.no",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/ex498gntqqq21.jpg"
+    image: getAssetPath("/images/listing-images/ex498gntqqq21.jpg")
   },
   {
     id: "29",
@@ -224,7 +226,7 @@ export const listings: Listing[] = [
       email: "mads.rasmussen@gmail.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/techtalk-gameboy-header.jpg",
+    image: getAssetPath("/images/listing-images/techtalk-gameboy-header.jpg"),
     readyToShip: true
   },
   {
@@ -239,7 +241,7 @@ export const listings: Listing[] = [
       email: "erik.lindqvist@outlook.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/oyz8q4vhe1u21.jpg",
+    image: getAssetPath("/images/listing-images/oyz8q4vhe1u21.jpg"),
     readyToShip: true
   },
   {
@@ -254,7 +256,7 @@ export const listings: Listing[] = [
       email: "bjork.gunnarsdottir@hotmail.com",
       type: "Business"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/kTCefaNg.png"
+    image: getAssetPath("/images/listing-images/kTCefaNg.png")
   },
   {
     id: "27",
@@ -268,7 +270,7 @@ export const listings: Listing[] = [
       email: "silje.larsen@gmail.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/vgmmzjz9orsyt8imcwwd.jpg"
+    image: getAssetPath("/images/listing-images/vgmmzjz9orsyt8imcwwd.jpg")
   },
   {
     id: "28",
@@ -282,7 +284,7 @@ export const listings: Listing[] = [
       email: "linus.ekstrom@telia.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/60a071a6d8ce7cb882cadc93fbb2313e.jpg"
+    image: getAssetPath("/images/listing-images/60a071a6d8ce7cb882cadc93fbb2313e.jpg")
   },
   {
     id: "24",
@@ -296,7 +298,7 @@ export const listings: Listing[] = [
       email: "louise.christensen@gmail.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/f9055mnaons81.jpg"
+    image: getAssetPath("/images/listing-images/f9055mnaons81.jpg")
   },
   {
     id: "22",
@@ -310,7 +312,7 @@ export const listings: Listing[] = [
       email: "astrid.bergman@hotmail.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/Tiger-Electronics-2.jpg"
+    image: getAssetPath("/images/listing-images/Tiger-Electronics-2.jpg")
   },
   {
     id: "11",
@@ -324,7 +326,7 @@ export const listings: Listing[] = [
       email: "kristian.hansen@gmail.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/gameboy-console.jpg"
+    image: getAssetPath("/images/listing-images/gameboy-console.jpg")
   },
   {
     id: "12",
@@ -338,7 +340,7 @@ export const listings: Listing[] = [
       email: "emma.johansson@hotmail.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/Tiger-Electronics-2.jpg",
+    image: getAssetPath("/images/listing-images/Tiger-Electronics-2.jpg"),
     readyToShip: true
   },
   {
@@ -353,7 +355,7 @@ export const listings: Listing[] = [
       email: "mikkel.jensen@gmail.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/ex498gntqqq21.jpg"
+    image: getAssetPath("/images/listing-images/ex498gntqqq21.jpg")
   },
   {
     id: "14",
@@ -367,7 +369,7 @@ export const listings: Listing[] = [
       email: "matti.korhonen@gmail.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/f9055mnaons81.jpg",
+    image: getAssetPath("/images/listing-images/f9055mnaons81.jpg"),
     readyToShip: true
   },
   {
@@ -382,7 +384,7 @@ export const listings: Listing[] = [
       email: "sofia.andersson@outlook.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/oyz8q4vhe1u21.jpg"
+    image: getAssetPath("/images/listing-images/oyz8q4vhe1u21.jpg")
   },
   {
     id: "16",
@@ -396,7 +398,7 @@ export const listings: Listing[] = [
       email: "juha.makinen@yahoo.com",
       type: "Business"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/s-l400.jpg"
+    image: getAssetPath("/images/listing-images/s-l400.jpg")
   },
   {
     id: "17",
@@ -410,7 +412,7 @@ export const listings: Listing[] = [
       email: "hanne.pedersen@gmail.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/vgmmzjz9orsyt8imcwwd.jpg"
+    image: getAssetPath("/images/listing-images/vgmmzjz9orsyt8imcwwd.jpg")
   },
   {
     id: "18",
@@ -424,7 +426,7 @@ export const listings: Listing[] = [
       email: "gustav.nilsson@telia.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/60a071a6d8ce7cb882cadc93fbb2313e.jpg",
+    image: getAssetPath("/images/listing-images/60a071a6d8ce7cb882cadc93fbb2313e.jpg"),
     readyToShip: true
   },
   {
@@ -439,7 +441,7 @@ export const listings: Listing[] = [
       email: "thomas.nielsen@gmail.com",
       type: "Private"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/techtalk-gameboy-header.jpg"
+    image: getAssetPath("/images/listing-images/techtalk-gameboy-header.jpg")
   },
   {
     id: "20",
@@ -453,6 +455,6 @@ export const listings: Listing[] = [
       email: "helga.jonsdottir@hotmail.com",
       type: "Business"
     },
-    image: "/nexus-shadcn-prototype/images/listing-images/kTCefaNg.png"
+    image: getAssetPath("/images/listing-images/kTCefaNg.png")
   }
 ] 
