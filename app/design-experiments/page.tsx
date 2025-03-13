@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Shapes, Layers, Wand2, Paintbrush, Lightbulb, List, LayoutGrid } from "lucide-react"
+import { Shapes, Layers, Wand2, Paintbrush, Lightbulb, List, LayoutGrid, FolderTree } from "lucide-react"
 import Link from "next/link"
 
 export default function DesignExperimentsPage() {
@@ -11,6 +11,12 @@ export default function DesignExperimentsPage() {
       description: "A horizontal toolbar for listings with tabs, sorting, and options menu.",
       icon: List,
       href: "/design-experiments/listings-toolbar",
+    },
+    {
+      title: "Category Dropdown",
+      description: "A multilevel dropdown for displaying hierarchical categories.",
+      icon: FolderTree,
+      href: "/design-experiments/category-dropdown",
     },
     {
       title: "Buttons & Controls",

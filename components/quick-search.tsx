@@ -79,25 +79,6 @@ export function QuickSearch() {
     command()
   }, [])
 
-  // Render a placeholder during server-side rendering
-  if (!mounted) {
-    return (
-      <Button 
-        variant="outline" 
-        className="relative h-9 w-60 justify-start rounded-[0.5rem] bg-background text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64"
-        disabled
-      >
-        <span className="inline-flex">
-          <Search className="mr-2 h-4 w-4" />
-          Quick search for User ID, AdID, Name etc...
-        </span>
-        <kbd className="pointer-events-none absolute right-1.5 top-1.5 hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
-          <span className="text-xs">⌘</span>K
-        </kbd>
-      </Button>
-    )
-  }
-
   const handleOpenChange = (open: boolean) => {
     setOpen(open)
   }
@@ -127,6 +108,8 @@ export function QuickSearch() {
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
+      
+      {/* Only render the CommandDialog on the client side */}
       {mounted && (
         <CommandDialog open={open} onOpenChange={handleOpenChange}>
           <CommandInput placeholder="Quick search for User ID, AdID, Name etc..." />
