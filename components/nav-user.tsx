@@ -192,6 +192,12 @@ export function NavUser({
                       Listings Toolbar
                     </Link>
                   </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/design-experiments/category-dropdown">
+                      <ListFilter className="mr-2 h-4 w-4" />
+                      Ad Types Dropdown Concept
+                    </Link>
+                  </DropdownMenuItem>
                   {/*<DropdownMenuItem asChild>
                     <Link href="/design-experiments/buttons">
                       <Shapes className="mr-2 h-4 w-4" />
